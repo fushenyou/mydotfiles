@@ -1,0 +1,248 @@
+set nocompatible
+filetype off
+
+call plug#begin('~/.vim/plugged')
+
+" Define bundles via Github repos
+" 主题
+Plug 'tomasr/molokai'
+" 目录栏插件
+Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
+Plug 'jistr/vim-nerdtree-tabs'
+Plug 'Xuyuanp/nerdtree-git-plugin'
+" 状态栏插件
+Plug 'vim-airline/vim-airline'
+" 列编辑模式
+Plug 'terryma/vim-multiple-cursors'
+Plug 'kovisoft/paredit'
+
+Plug 'majutsushi/tagbar'
+" 自动补全
+function! BuildYCM(info)
+  " info is a dictionary with 3 fields
+  " - name:   name of the plugin
+  " - status: 'installed', 'updated', or 'unchanged'
+  " - force:  set on PlugInstall! or PlugUpdate!
+  if a:info.status == 'installed' || a:info.force
+    !./install.py
+  endif
+endfunction
+
+Plug 'Valloric/YouCompleteMe', { 'do': function('BuildYCM'),'for': ['c', 'cpp'] }
+
+"检索插件
+Plug 'ctrlpvim/ctrlp.vim'
+Plug 'tacahiroy/ctrlp-funky'
+"markdown-预览插件
+Plug 'iamcco/markdown-preview.vim'
+"mardown-预览数字公式
+Plug 'iamcco/mathjax-support-for-mkdp'
+Plug 'Yggdroot/indentLine'
+Plug 'jiangmiao/auto-pairs'
+Plug 'tell-k/vim-autopep8'
+Plug 'scrooloose/nerdcommenter'
+
+if filereadable(expand("~/.vimrc.bundles.local"))
+  source ~/.vimrc.bundles.local
+endif
+call plug#end() 
+filetype plugin indent on
+
+" molokai 主题
+let g:molokai_original = 1
+let g:rehash256 = 1
+colorscheme molokai
+set guifont=Monaco:h12
+ ""配置颜色solarized  yytextmate Tomorrow-Night-Bright  Tomorrow-Night-Eighties
+if has('gui_macvim')
+    ""设置mac vim 背景
+    set background=dark
+    colorscheme molokai
+    set guifont=Monaco:h12
+    "set transparency=2
+    ""不全屏为set nofu
+    set nofu
+endif
+
+" markdown 预览
+let g:mkdp_path_to_chrome = "open -a Google\\ Chrome"
+let g:mkdp_auto_start = 0
+    " 设置为 1 可以在打开 markdown 文件的时候自动打开浏览器预览，只在打开
+    " markdown 文件的时候打开一次
+
+ let g:mkdp_auto_open = 0
+    " 设置为 1 在编辑 markdown 的时候检查预览窗口是否已经打开，否则自动打开预
+    " 览窗口
+
+ let g:mkdp_auto_close = 1
+    " 在切换 buffer 的时候自动关闭预览窗口，设置为 0 则在切换 buffer 的时候不
+    " 自动关闭预览窗口
+
+ let g:mkdp_refresh_slow = 0
+    " 设置为 1 则只有在保存文件，或退出插入模式的时候更新预览，默认为 0，实时
+    " 更新预览
+
+ let g:mkdp_command_for_global = 0
+    " 设置为 1 则所有文件都可以使用 MarkdownPreview 进行预览，默认只有 markdown
+    " 文件可以使用改命令
+
+nmap <silent> <F8> <Plug>MarkdownPreview        " 普通模式
+imap <silent> <F8> <Plug>MarkdownPreview        " 插入模式
+nmap <silent> <F9> <Plug>StopMarkdownPreview    " 普通模式
+imap <silent> <F9> <Plug>StopMarkdownPreview    " 插入模式
+
+" key maping
+" NERDTreeToggle
+" 关闭NERDTree快捷键
+map <F3> :NERDTreeToggle<CR>
+" 显示行号
+let NERDTreeShowLineNumbers=1
+let NERDTreeAutoCenter=1
+" 是否显示隐藏文件
+let NERDTreeShowHidden=1
+" 设置宽度
+let NERDTreeWinSize=31
+" 在终端启动vim时，共享NERDTree
+let g:nerdtree_tabs_open_on_console_startup=1
+" 忽略一下文件的显示
+let NERDTreeIgnore=['\.pyc','\~$','\.swp']
+" 显示书签列表
+let NERDTreeShowBookmarks=1
+
+let g:NERDTreeIndicatorMapCustom = {
+    \ "Modified"  : "✹",
+    \ "Staged"    : "✚",
+    \ "Untracked" : "✭",
+    \ "Renamed"   : "➜",
+    \ "Unmerged"  : "═",
+    \ "Deleted"   : "✖",
+    \ "Dirty"     : "✗",
+    \ "Clean"     : "✔︎",
+    \ "Unknown"   : "?"
+    \ }
+" ctrlP快捷键
+let g:ctrlp_map = '<C-p>'
+let g:ctrlp_cmd = 'CtrlP'
+"map <leader>f :CtrlPMRU<CR>
+let g:ctrlp_custom_ignore = {
+    \ 'dir':  '\v[\/]\.(git|hg|svn|rvm)$',
+    \ 'file': '\v\.(exe|so|dll|zip|tar|tar.gz|pyc)$',
+    \ }
+let g:ctrlp_working_path_mode=0
+let g:ctrlp_match_window_bottom=1
+let g:ctrlp_max_height=15
+let g:ctrlp_match_window_reversed=0
+let g:ctrlp_mruf_max=500
+let g:ctrlp_follow_symlinks=1
+
+nnoremap <Leader>fu :CtrlPFunky<Cr>
+" narrow the list down with a word under cursor
+nnoremap <Leader>fU :execute 'CtrlPFunky ' . expand('<cword>')<Cr>
+let g:ctrlp_funky_syntax_highlight = 1
+
+let g:ctrlp_extensions = ['funky']
+""insert mode shortcut 输入模式
+inoremap <C-h> <Left>
+inoremap <C-j> <Down>
+inoremap <C-k> <Up>
+inoremap <C-l> <Right>
+inoremap <C-d> <DELETE>
+
+""command line 命令模式
+"cnoremap <C-A> <Home>
+"cnoremap <C-E> <End>
+"cnoremap <C-B> <Left>
+"cnoremap <C-F> <Right>
+
+""标签翻页快捷键
+map <leader>tt :tabnew<cr>
+map gc :tabclose<cr>
+map gm :tabmove
+nmap <Tab> :tabnext<cr>
+
+""取消上下左右
+noremap <Up> <nop>
+noremap <Down> <nop>
+noremap <Left> <nop>
+noremap <Right> <nop>
+
+ "buffer
+nnoremap <leader>bn : bnext<cr>
+nnoremap <leader>bp : bprevious<cr>
+" Close the current buffer
+map <leader>bd :bd<cr>
+" Close all the buffers
+map <leader>ba :1,1000 bd!<cr>
+""未保存跳转buffer报错
+set hid
+
+""上移下移 command +hj
+nmap <M-j> mz:m+<cr>`z
+nmap <M-k> mz:m-2<cr>`z
+vmap <M-j> :m'>+<cr>`<my`>mzgv`yo`z
+vmap <M-k> :m'<-2<cr>`>my`<mzgv`yo`z  nmap <D-j> <M-j>
+
+if has("mac") || has("macunix")
+ nmap <D-j> <M-j>
+ nmap <D-k> <M-k>
+ vmap <D-j> <M-j>
+ vmap <D-k> <M-k>
+endif
+
+""退出快捷键
+" map Q :x<cr>
+
+ ""查找替换
+"map <C-H> :%s/
+
+ "" 取消高亮
+nnoremap <leader><Esc> :nohlsearch<cr>
+ 
+""set spell
+map <leader>sn ]s
+map <leader>sp [s
+"nnoremap j gj
+"nnoremap k gk
+""全选
+map <leader>a ggVG
+""删除windows的^M
+map <leader>M :%s/\r//g<cr>
+
+" 设置快捷键将选中文本块复制至系统剪贴板
+vnoremap <Leader>y "+y
+
+" 设置快捷键将系统剪贴板内容粘贴至 vim
+nmap <Leader>p "+p
+
+" 定义快捷键保存当前窗口内容
+nmap <Leader>w :w<cr>
+
+" 跳转至右方的窗口
+nnoremap <Leader>lw <C-W>l
+" 跳转至方的窗口
+nnoremap <Leader>hw <C-W>h
+" 跳转至上方的子窗口
+nnoremap <Leader>kw <C-W>k
+" 跳转至下方的子窗口
+nnoremap <Leader>jw <C-W>j
+
+""删除所有行未尾空格
+nnoremap <F7> :%s/[ \t\r]\+$//g<cr>
+
+" Multip Cursor
+let g:multi_cursor_next_key='<S-n>'
+
+let g:multi_cursor_prev_key='<S-p>'
+
+let g:multi_cursor_skip_key='<S-x>'
+
+let g:multi_cursor_quit_key='<Esc>'
+
+nmap <F4> :TagbarToggle<CR> 
+
+"缩进指示线"
+let g:indentLine_char='┆'
+let g:indentLine_enabled = 1
+
+"autopep8设置"
+let g:autopep8_disable_show_diff=1

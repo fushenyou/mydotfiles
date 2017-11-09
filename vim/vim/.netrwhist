@@ -1,0 +1,8 @@
+let g:netrw_dirhistmax  =10
+let g:netrw_dirhist_cnt =6
+let g:netrw_dirhist_1='/'
+let g:netrw_dirhist_2='/Library'
+let g:netrw_dirhist_3='/Users/chain/workCloud/dotfiles/vim/new/vim'
+let g:netrw_dirhist_4='/workspaces/dotfiles/mydotfiles/shell/x-update-hosts'
+let g:netrw_dirhist_5='/workspaces/dotfiles/mydotfiles/vim'
+let g:netrw_dirhist_6='/workspaces/dotfiles/mydotfiles/.git'

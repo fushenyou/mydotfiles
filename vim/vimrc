@@ -1,0 +1,167 @@
+
+""基础配置:
+set nocompatible            ""关闭vi兼容模式
+set shortmess=atI          ""启动的时候不显示那个援助索马里儿童的提示
+set noignorecase            ""搜索不区分大小写
+set hlsearch                ""开启高亮显示结果
+set incsearch               ""开启实时搜索功能
+set ruler                   ""显标标尺
+set number                  ""显示行号
+set tabpagemax=20           ""标签最多显示9页
+set showtabline=1           ""标签默认显示1页
+set history=50              ""保留历史记录
+set showcmd                 ""状态栏显示目前所执行的指令
+set wildmenu                ""命令行于状态行
+set autoread                ""当文件在外部被修改时自动更新该文件
+
+set autoindent              ""自动对齐
+set smartindent             ""智能自动缩进
+set linespace=4             ""每行4个空格
+set shiftwidth=4            ""换行时行间交错4空格
+set tabstop=4               ""设置tab键的宽度
+set cursorline              ""高亮光标行
+set cursorcolumn            ""亮亮光标列
+set softtabstop=4           ""退格键删除4空格
+set expandtab               ""缩进采用空格 tab用noexpandtab  空格用expandtab
+set nospell                 ""拼写检查
+set showmatch               ""括号配对情况
+set foldmethod=marker
+"set foldmethod=indent       " fold based on indent level
+set foldenable              ""启动vim打开折叠 nofoldenable不打开
+set foldlevelstart=10       " open most folds by default
+set foldnestmax=10          " 10 nested fold max
+
+""set matchtime=5           ""显示符合匹配在0.5秒
+set cmdheight=1             ""信念楼兰行高
+set listchars=tab:\|\ ,trail:.,extends:>,precedes:<
+set laststatus=2            ""开启状态栏信息
+set backupext=.bak          ""备份文件后缀
+""换行
+set whichwrap+=<,>,h,l,b,s,[,]
+set complete=.,w,b,k,t,i    ""自动完成
+
+set nowrap                    ""设置wrap自动换行,可以改成nowrp
+set numberwidth=4           ""行号宽度
+set equalalways             ""分割窗口时保持相等的宽/高
+set clipboard+=unnamed      ""共享剪贴板
+set ambiwidth=double        ""防止符号无法显示
+set list                    ""tab符号
+set so=7
+""匹配对
+set matchpairs=(:),{:},[:],<:>
+
+"自动补全
+set completeopt=longest,menu
+""默认不支持退格删除
+""插入模式下使用 <BS>、<Del> <C-W> <C-U>
+set backspace=indent,eol,start
+
+set helplang=cn             ""中文文档
+set nobackup                ""关闭备份
+set noswapfile              ""关闭.swp
+
+set nobomb                  ""不使用Unicode bom签名
+set fileformat=unix         ""文件格式，默认 ffs=dos,unix
+set fileformats=unix,dos,mac
+
+set fileencoding=utf-8      "" encoding编码设置
+set fileencodings=ucs-bom,utf-8,cp936,gb18030,big5,euc-jp,euc-kr,latin1
+
+""set noscrollbind          "" 禁止分屏滚动
+""set textwidth=80          ""每行80个字符自动换行
+""set mouse=a               ""启用鼠标
+
+""关闭提示音
+set noerrorbells
+set novisualbell
+set t_vb=             "关闭提示音
+
+""语法高亮
+syntax on                   "文件侦测
+filetype indent on          " 针对不同的文件类型采用不同的缩进格式
+filetype plugin on          " 针对不同的文件类型加载对应的插件
+"filetype plugin indent on   "不同文件类型加载插件
+syntax enable               "语法高亮
+
+"test
+
+" 保存全局变量
+set viminfo+=!
+" 带有如下符号的单词不要被换行分割
+set iskeyword+=_,$,@,%,#,-
+"粘贴错乱
+set pastetoggle=<leader>to
+
+if has('mouse_sgr')
+    set ttymouse=sgr
+endif"
+
+ " 关闭VIM的时候保存会话，按ctrl+@读取会话
+ set sessionoptions=buffers,sesdir,help,tabpages,winsize
+ let $VIMSESSION = '~/.session.vim'
+ au VimLeave * mks! $VIMSESSION
+ map <C-@> :so $VIMSESSION<CR>
+
+" move to beginning/end of line
+"nnoremap B ^
+"nnoremap E $
+
+" $/^ doesn't do anything
+"nnoremap $ <nop>
+"nnoremap ^ <nop>
+" highlight last inserted text
+nnoremap gV `[v`]
+
+set lazyredraw          " redraw only when we need to.
+
+"test end
+
+ "" 字体设置
+
+ ""窗口启动时自动最大化
+ ""窗口设置
+if has('gui_running')
+    set guioptions=mr       "c去掉"
+    set guioptions=         ""隐藏全部
+    set guioptions+=m       " 隐藏菜单栏
+    set guioptions-=T       " 隐藏工具栏
+    set guioptions-=L       " 隐藏左侧滚动条
+    ""set guioptions+=r       " 隐藏右侧滚动条
+    ""set guioptions-=b     " 隐藏底部滚动条
+    ""set showtabline-=0    " 隐藏Tab栏
+endif
+
+ ""自动改变当前目录
+ if has('netbeans_intg')
+    set autochdir
+ endif
+ ""如果为空文件，则自动设置当前目录为桌面
+ " lcd ~/Desktop/
+
+
+"版本检测
+if v:version < 700
+    echoerr 'This vimrc requires Vim 7 or later.'
+    finish
+endif
+
+"" 定义 <Leader> 为逗号
+"let mapleader = ","
+"let maplocalleader = ","
+
+""快捷键
+
+
+
+
+"" 黓认状态栏格式(现在用的是powerline)
+hi StatusLine  guifg=#FFFFFF guibg=#393939 gui=none
+if version >= 700
+ autocmd InsertEnter * hi StatusLine guifg=#E0E0E0 guibg=Grey40 gui=none
+ autocmd InsertLeave * hi StatusLine guifg=#FFFFFF guibg=#393939 gui=none
+endif
+set statusline=\ %F%m%r%h\ [%Y]\ [%{&ff}]\ %w\ \ \ \ \ Encoding:\ %{(&fenc==\"\")?&enc:&fenc}%{(&bomb?\"[BOM]\":\"\")}\ \ \ \ \ Line:\ %l\|%L:%c\ [%p%%-%P]
+
+if filereadable(expand("~/.vimrc.bundles"))
+  source ~/.vimrc.bundles
+endif
