@@ -8,6 +8,8 @@
 ## 安装
     >chmod +x ./zsh/install.sh
     >./zsh/install.sh
+##设置zsh为默认的shell
+chsh -s /bin/zsh
 
 #  vim环境配置  
     具体介绍请详见./vim/README.md
