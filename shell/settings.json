@@ -1,0 +1,87 @@
+{
+    "javascript.implicitProjectConfig.experimentalDecorators": true,
+    "gitlens.advanced.messages": {
+        "suppressCommitHasNoPreviousCommitWarning": false,
+        "suppressCommitNotFoundWarning": false,
+        "suppressFileNotUnderSourceControlWarning": false,
+        "suppressGitVersionWarning": false,
+        "suppressLineUncommittedWarning": false,
+        "suppressNoRepositoryWarning": false,
+        "suppressResultsExplorerNotice": false,
+        "suppressShowKeyBindingsNotice": true
+    },
+    "prettier.tabWidth": 4,
+    "prettier.printWidth": 110,
+    "todohighlight.isEnable": true,
+    "todohighlight.isCaseSensitive": true,
+    "todohighlight.keywords": [
+        "DEBUG:",
+        "REVIEW:",
+        {
+            "text": "NOTE:",
+            "color": "#D15FEE",
+            "backgroundColor": "none",
+        },
+        {
+            "text": "HACK:",
+            "color": "#8968CD",
+            "backgroundColor": "none",
+        },
+        {
+            "text": "TODO:",
+            "color": "#4876FF",
+            // "border": "1px solid red",
+            "backgroundColor": "none",
+            "isWholeLine": true,
+            // "borderRadius": "2px", //NOTE: using borderRadius along with `border` or you will see nothing change
+            // "backgroundColor": "rgba(0,0,0,.2)",
+            //other styling properties goes here ... 
+        },
+        {
+            "text": "FIXME:",
+            "color": "#EE3A8C",
+            // "border": "1px solid red",
+            "backgroundColor": "none",
+            "isWholeLine": true,
+            // "borderRadius": "2px", //NOTE: using borderRadius along with `border` or you will see nothing change
+            // "backgroundColor": "rgba(0,0,0,.2)",
+            //other styling properties goes here ... 
+        }
+    ],
+    // "todohighlight.keywordsPattern": "TODO:|FIXME:|\\(([^)]+)\\)", //highlight `TODO:`,`FIXME:` or content between parentheses
+    // "todohighlight.defaultStyle": {
+    //     "color": "red",
+    //     "backgroundColor": "none",
+    //     "overviewRulerColor": "#ffab00",
+    //     "cursor": "pointer",
+    //     // "border": "1px solid #eee",
+    //     // "borderRadius": "2px",
+    //     "isWholeLine": true,
+    //     //other styling properties goes here ... 
+    // },
+    "todohighlight.include": [
+        "**/*.js",
+        "**/*.jsx",
+        "**/*.ts",
+        "**/*.tsx",
+        "**/*.html",
+        "**/*.php",
+        "**/*.css",
+        "**/*.scss"
+    ],
+    "todohighlight.exclude": [
+        "**/node_modules/**",
+        "**/bower_components/**",
+        "**/dist/**",
+        "**/build/**",
+        "**/.vscode/**",
+        "**/.github/**",
+        "**/_output/**",
+        "**/*.min.*",
+        "**/*.map",
+        "**/.next/**"
+    ],
+    "todohighlight.maxFilesForSearch": 5120,
+    "todohighlight.toggleURI": false,
+    "workbench.colorTheme": "Solarized Light"
+}
